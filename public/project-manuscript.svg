@@ -1,0 +1,24 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" fill="#0b1020"/>
+  <rect x="48" y="42" width="864" height="456" rx="28" fill="#111827" stroke="#a855f7" stroke-opacity="0.42" stroke-width="2"/>
+  <rect x="82" y="78" width="250" height="382" rx="24" fill="#171226" stroke="#c084fc" stroke-opacity="0.35"/>
+  <rect x="374" y="78" width="504" height="108" rx="22" fill="#111c31"/>
+  <rect x="374" y="220" width="504" height="102" rx="22" fill="#111c31"/>
+  <rect x="374" y="356" width="504" height="104" rx="22" fill="#111c31"/>
+  <path d="M158 136H272V388H142V152C142 143.163 149.163 136 158 136Z" fill="#f4e7c2"/>
+  <path d="M158 136H272V388H142V152C142 143.163 149.163 136 158 136Z" stroke="#fbbf24" stroke-opacity="0.45" stroke-width="2"/>
+  <path d="M170 190H246M170 230H236M170 270H254M170 310H228" stroke="#7c2d12" stroke-opacity="0.62" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="286" cy="156" r="34" fill="#22d3ee" fill-opacity="0.18" stroke="#22d3ee" stroke-opacity="0.6"/>
+  <path d="M272 156L282 166L302 142" stroke="#67e8f9" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="414" y="112" width="198" height="18" rx="9" fill="#c084fc"/>
+  <rect x="414" y="146" width="338" height="12" rx="6" fill="#64748b"/>
+  <rect x="414" y="254" width="236" height="18" rx="9" fill="#67e8f9"/>
+  <rect x="414" y="288" width="374" height="12" rx="6" fill="#64748b"/>
+  <rect x="414" y="390" width="176" height="18" rx="9" fill="#f0abfc"/>
+  <rect x="414" y="424" width="314" height="12" rx="6" fill="#64748b"/>
+  <rect x="764" y="112" width="72" height="32" rx="16" fill="#22c55e" fill-opacity="0.2" stroke="#22c55e" stroke-opacity="0.55"/>
+  <rect x="764" y="254" width="72" height="32" rx="16" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-opacity="0.55"/>
+  <rect x="764" y="390" width="72" height="32" rx="16" fill="#a855f7" fill-opacity="0.24" stroke="#a855f7" stroke-opacity="0.65"/>
+  <text x="142" y="108" fill="#e9d5ff" font-family="Arial, sans-serif" font-size="18" font-weight="700">Manuscript Scan</text>
+  <text x="414" y="102" fill="#e0f2fe" font-family="Arial, sans-serif" font-size="18" font-weight="700">OCR Metadata</text>
+</svg>
