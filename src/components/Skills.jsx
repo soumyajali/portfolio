@@ -24,8 +24,6 @@ export const Skills = () => {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   const skills = [
-    { name: 'C', icon: '⚡' },
-    { name: 'Python', icon: '🐍' },
     { name: 'Java', icon: '☕' },
     { name: 'HTML', icon: '🏷️' },
     { name: 'CSS', icon: '🎨' },

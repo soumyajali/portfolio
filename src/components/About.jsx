@@ -73,7 +73,7 @@ export const About = () => {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="text-center bg-[rgba(255,255,255,0.02)] rounded-xl p-4 border border-[rgba(255,255,255,0.08)] transition">
-                <p className="text-4xl md:text-5xl font-bold text-white">7.7</p>
+                <p className="text-4xl md:text-5xl font-bold text-white">7.69</p>
                 <p className="text-secondarytext text-sm font-medium mt-3">CGPA Achieved</p>
               </motion.div>
 
