@@ -14,7 +14,7 @@ import {
 
 export default function App() {
   return (
-    <div className="bg-black text-white overflow-hidden">
+    <div className="bg-background text-primarytext overflow-hidden min-h-screen">
       <Navigation />
       <main>
         <Hero />

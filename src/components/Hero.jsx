@@ -4,7 +4,7 @@ import { TypingEffect } from './TypingEffect';
 
 const Particle = ({ delay }) => (
   <motion.div
-    className="absolute w-1 h-1 bg-cyan-500 rounded-full"
+    className="absolute w-1 h-1 bg-[rgba(255,255,255,0.15)] rounded-full"
     initial={{ opacity: 0, y: 0 }}
     animate={{
       opacity: [0, 1, 0],
@@ -45,7 +45,7 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
       {/* Animated Background Particles */}
       <div className="absolute inset-0 overflow-hidden">
@@ -54,8 +54,8 @@ export const Hero = () => {
         ))}
       </div>
 
-      {/* Glowing gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-purple-500/10 blur-3xl" />
+      {/* Subtle radial background to match the dark brown glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#3E2A27] via-background to-background opacity-60 pointer-events-none" />
 
       {/* Main Content */}
       <motion.div
@@ -70,25 +70,25 @@ export const Hero = () => {
           className="mb-8"
         >
           <motion.div
-            className="w-32 h-32 md:w-40 md:h-40 mx-auto bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full p-1 shadow-2xl shadow-purple-500/60 border border-cyan-300/20"
+            className="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full p-1 border border-[rgba(255,255,255,0.1)] shadow-2xl"
             animate={{
               boxShadow: [
-                '0 0 20px rgba(34, 211, 238, 0.5)',
-                '0 0 40px rgba(168, 85, 247, 0.5)',
-                '0 0 20px rgba(34, 211, 238, 0.5)',
+                '0 0 20px rgba(255, 107, 0, 0.2)',
+                '0 0 40px rgba(255, 107, 0, 0.4)',
+                '0 0 20px rgba(255, 107, 0, 0.2)',
               ],
             }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <div className="w-full h-full bg-gradient-to-br from-slate-900 to-purple-900 rounded-full flex items-center justify-center text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">
+            <div className="w-full h-full bg-secondary rounded-full flex items-center justify-center text-5xl md:text-6xl font-bold text-white tracking-tighter">
               SB
             </div>
           </motion.div>
         </motion.div>
 
         {/* Name */}
-        <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-black mb-4">
-          <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+          <span className="text-white">
             SOWMYA BASAPPA
           </span>
         </motion.h1>
@@ -98,7 +98,7 @@ export const Hero = () => {
           variants={itemVariants}
           className="h-20 md:h-24 flex items-center justify-center"
         >
-          <p className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300">
+          <p className="text-2xl md:text-4xl font-semibold text-secondarytext">
             <TypingEffect text="Web Development | Building Innovative Solutions" speed={80} />
           </p>
         </motion.div>
@@ -106,7 +106,7 @@ export const Hero = () => {
         {/* Tagline */}
         <motion.p
           variants={itemVariants}
-          className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed font-medium"
+          className="text-lg md:text-xl text-secondarytext mb-12 max-w-2xl mx-auto leading-relaxed"
         >
           Crafting exceptional digital experiences with modern technologies. Passionate about AI, web development, and innovative solutions.
         </motion.p>
@@ -114,38 +114,32 @@ export const Hero = () => {
         {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
         >
-          <motion.a
+          <a
             href="https://github.com/soumyajali"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(34, 211, 238, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 md:px-12 md:py-5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold flex items-center gap-2 shadow-xl shadow-cyan-500/40 hover:shadow-2xl hover:shadow-cyan-500/60 border border-cyan-300/30 hover:border-cyan-300/60 transition text-lg"
+            className="btn-secondary flex items-center gap-2"
           >
             <Code size={20} /> GitHub
-          </motion.a>
+          </a>
 
-          <motion.a
+          <a
             href="https://www.linkedin.com/in/sowmya-b-520b87351/"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(168, 85, 247, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 md:px-12 md:py-5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold flex items-center gap-2 shadow-xl shadow-purple-500/40 hover:shadow-2xl hover:shadow-purple-500/60 border border-purple-300/30 hover:border-purple-300/60 transition text-lg"
+            className="btn-primary flex items-center gap-2"
           >
             <Briefcase size={20} /> LinkedIn
-          </motion.a>
+          </a>
 
-          <motion.a
+          <a
             href="mailto:www.soumya118@gmail.com"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 md:px-12 md:py-5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold flex items-center gap-2 shadow-xl shadow-pink-500/40 hover:shadow-2xl hover:shadow-pink-500/60 border border-pink-300/30 hover:border-pink-300/60 transition text-lg"
+            className="btn-secondary flex items-center gap-2"
           >
             <Mail size={20} /> Contact
-          </motion.a>
+          </a>
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -154,7 +148,7 @@ export const Hero = () => {
           transition={{ duration: 2, repeat: Infinity }}
           className="flex justify-center"
         >
-          <Mouse className="text-cyan-400 animate-pulse" size={24} />
+          <Mouse className="text-accent animate-pulse" size={24} />
         </motion.div>
       </motion.div>
     </section>

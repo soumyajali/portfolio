@@ -23,7 +23,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-black border-t border-purple-500/20 py-12 px-4">
+    <footer className="bg-secondary border-t border-[rgba(255,255,255,0.08)] py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Social Links */}
         <div className="flex justify-center gap-6 mb-8">
@@ -35,12 +35,11 @@ export const Footer = () => {
                 href={social.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-3 rounded-full bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-cyan-300 border border-purple-500/30 hover:border-cyan-500/50 transition"
+                whileHover={{ y: -4 }}
+                className="p-3 rounded-full bg-[rgba(255,255,255,0.05)] text-secondarytext hover:text-white border border-[rgba(255,255,255,0.08)] hover:border-[rgba(255,255,255,0.15)] hover:bg-[rgba(255,255,255,0.1)] transition"
                 aria-label={social.label}
               >
-                <Icon size={24} />
+                <Icon size={20} />
               </motion.a>
             );
           })}
@@ -51,18 +50,18 @@ export const Footer = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-center text-gray-400 border-t border-purple-500/10 pt-8"
+          className="text-center text-secondarytext border-t border-[rgba(255,255,255,0.08)] pt-8"
         >
-          <p className="mb-2 text-base font-medium">
-            Made with <motion.span
+          <p className="mb-2 text-sm font-medium">
+            Designed and built with <motion.span
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
-              className="inline-block text-red-500"
+              className="inline-block text-accent"
             >
-              <Heart size={18} fill="currentColor" />
+              <Heart size={14} fill="currentColor" />
             </motion.span> by Sowmya Basappa Jaali
           </p>
-          <p className="text-sm font-medium">© {currentYear} All rights reserved.</p>
+          <p className="text-xs font-medium">© {currentYear} All rights reserved.</p>
         </motion.div>
       </div>
     </footer>

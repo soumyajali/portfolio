@@ -48,73 +48,60 @@ export const Navigation = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-purple-500/30 shadow-lg shadow-purple-500/10"
+      className="fixed top-0 w-full z-50 glass-nav"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent cursor-pointer"
+            className="text-xl font-bold text-white cursor-pointer tracking-wider"
             onClick={() => scrollToSection('home')}
           >
             SB
           </motion.div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
-              <motion.button
+              <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="relative px-4 py-2 text-gray-300 font-semibold text-base transition group"
-                whileHover={{ color: '#06b6d4' }}
+                className={`nav-link px-4 py-2 font-medium text-sm ${activeSection === item.id ? 'active' : ''}`}
               >
                 {item.name}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500"
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-              </motion.button>
+              </button>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <motion.button
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg bg-purple-500/20 text-cyan-300 border border-purple-500/30 hover:border-cyan-500/50"
+            className="md:hidden p-2 rounded-lg text-secondarytext hover:text-white transition"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
         </div>
 
-        {/* Mobile Menu */}
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? 'auto' : 0 }}
           transition={{ duration: 0.3 }}
           className="md:hidden overflow-hidden"
         >
-          <div className="px-4 py-4 space-y-2 bg-gradient-to-b from-purple-900/20 to-cyan-900/20">
+          <div className="px-4 py-4 space-y-2 bg-secondary border-t border-[rgba(255,255,255,0.08)]">
             {navItems.map((item) => (
-              <motion.button
+              <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                whileHover={{ x: 10 }}
-                className={`w-full text-left px-4 py-2 rounded-lg transition ${
+                className={`w-full text-left px-4 py-3 rounded-lg transition text-sm font-medium ${
                   activeSection === item.id
-                    ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold'
-                    : 'text-gray-300 hover:bg-purple-500/20'
+                    ? 'bg-[rgba(255,255,255,0.05)] text-white'
+                    : 'text-secondarytext hover:text-white hover:bg-[rgba(255,255,255,0.02)]'
                 }`}
               >
                 {item.name}
-              </motion.button>
+              </button>
             ))}
           </div>
         </motion.div>
