@@ -195,22 +195,34 @@ export const Gallery = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  // Load admin status and uploaded images from localStorage on mount
+  const API_URL = 'http://localhost:5000';
+
+  // Load admin status and uploaded images from backend on mount
   useEffect(() => {
     const adminStatus = localStorage.getItem('isGalleryAdmin');
     if (adminStatus === 'true') {
       setIsAdmin(true);
     }
 
-    const saved = localStorage.getItem('galleryImages');
-    if (saved) {
-      try {
-        setUploadedImages(JSON.parse(saved));
-      } catch (e) {
-        console.error('Error loading gallery images:', e);
-      }
-    }
+    fetchImages();
   }, []);
+
+  const fetchImages = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/images`);
+      if (response.ok) {
+        const data = await response.json();
+        const imagesWithFullUrl = data.map(img => ({
+          ...img,
+          url: `${API_URL}${img.url}`,
+          isDefault: false
+        }));
+        setUploadedImages(imagesWithFullUrl);
+      }
+    } catch (e) {
+      console.error('Error fetching gallery images:', e);
+    }
+  };
 
   // Save admin status to localStorage
   const handleAdminLogin = () => {
@@ -223,11 +235,6 @@ export const Gallery = () => {
     localStorage.setItem('isGalleryAdmin', 'false');
   };
 
-  // Save uploaded images to localStorage
-  const saveToLocalStorage = (images) => {
-    localStorage.setItem('galleryImages', JSON.stringify(images));
-  };
-
   // Default gallery images
   const defaultImages = [
 
@@ -236,76 +243,66 @@ export const Gallery = () => {
   // Combined gallery images (uploaded + default)
   const allImages = [...uploadedImages, ...defaultImages];
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const files = Array.from(e.target.files);
 
-    files.forEach((file) => {
-      // Validate file is image
+    for (const file of files) {
       if (!file.type.startsWith('image/')) {
         alert('Please upload only image files');
-        return;
+        continue;
       }
 
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const MAX_WIDTH = 1000;
-          const MAX_HEIGHT = 1000;
-          let width = img.width;
-          let height = img.height;
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('title', file.name.split('.')[0]);
 
-          if (width > height) {
-            if (width > MAX_WIDTH) {
-              height *= MAX_WIDTH / width;
-              width = MAX_WIDTH;
-            }
-          } else {
-            if (height > MAX_HEIGHT) {
-              width *= MAX_HEIGHT / height;
-              height = MAX_HEIGHT;
-            }
-          }
+      try {
+        const response = await fetch(`${API_URL}/api/upload`, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const newImage = await response.json();
+          newImage.url = `${API_URL}${newImage.url}`;
+          newImage.isDefault = false;
           
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-          
-          // Compress to JPEG with 70% quality to save LocalStorage space
-          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
-
-          const newImage = {
-            url: compressedDataUrl,
-            title: file.name.split('.')[0],
-            description: 'My photo',
-            isDefault: false,
-          };
-
-          setUploadedImages((prev) => {
-            const updated = [newImage, ...prev];
-            try {
-              localStorage.setItem('galleryImages', JSON.stringify(updated));
-            } catch (e) {
-              alert("Storage limit exceeded! Try deleting some old photos first.");
-            }
-            return updated;
-          });
-        };
-        img.src = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    });
+          setUploadedImages((prev) => [newImage, ...prev]);
+        } else {
+          alert('Failed to upload image');
+        }
+      } catch (error) {
+        console.error('Upload error:', error);
+        alert('Error uploading image');
+      }
+    }
 
     // Reset input
     e.target.value = '';
   };
 
-  const handleDeleteImage = (index) => {
-    const updated = uploadedImages.filter((_, i) => i !== index);
-    setUploadedImages(updated);
-    saveToLocalStorage(updated);
+  const handleDeleteImage = async (index) => {
+    const imageToDelete = uploadedImages[index];
+    
+    if (imageToDelete && imageToDelete.id) {
+      try {
+        const response = await fetch(`${API_URL}/api/images/${imageToDelete.id}`, {
+          method: 'DELETE',
+        });
+        
+        if (response.ok) {
+          setUploadedImages((prev) => prev.filter((_, i) => i !== index));
+          setSelectedIndex(null);
+        } else {
+          alert('Failed to delete image');
+        }
+      } catch (error) {
+        console.error('Delete error:', error);
+        alert('Error deleting image');
+      }
+    } else {
+      setUploadedImages((prev) => prev.filter((_, i) => i !== index));
+    }
   };
 
   const handleNext = () => {
