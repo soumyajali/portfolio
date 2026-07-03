@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, Plus, Trash2, LogOut, Lock } from 'lucide-react';
+import { useState } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const GalleryModal = ({ image, onClose, allImages, currentIndex, onNext, onPrev }) => {
   return (
@@ -74,85 +74,7 @@ const GalleryModal = ({ image, onClose, allImages, currentIndex, onNext, onPrev 
   );
 };
 
-const AdminLoginModal = ({ onLogin, onClose }) => {
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simple admin password - in production, use proper authentication
-    if (password === 'sowvee') {
-      onLogin();
-      onClose();
-    } else {
-      setError('Invalid password');
-      setPassword('');
-    }
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={onClose}
-      className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 z-50"
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0, y: -20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: -20 }}
-        onClick={(e) => e.stopPropagation()}
-        className="premium-card p-8 w-full max-w-md"
-      >
-        <div className="flex items-center gap-3 mb-6">
-          <Lock className="text-accent" size={28} />
-          <h2 className="text-2xl font-bold text-white">Admin Access</h2>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-300 mb-2 font-semibold text-lg">
-              Enter Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setError('');
-              }}
-              placeholder="Enter admin password"
-              className="w-full px-4 py-3 bg-black/50 border border-accent/30 rounded-lg text-white text-base placeholder-gray-500 focus:outline-none focus:border-accent transition"
-              autoFocus
-            />
-            {error && (
-              <p className="text-red-400 text-base font-medium mt-2">{error}</p>
-            )}
-          </div>
-
-          <div className="flex gap-3">
-            <button
-              type="submit"
-              className="flex-1 btn-primary"
-            >
-              Login
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 btn-secondary"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-const GalleryItem = ({ image, index, onSelect, onDelete, isUploadable }) => {
+const GalleryItem = ({ image, index, onSelect }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -170,19 +92,6 @@ const GalleryItem = ({ image, index, onSelect, onDelete, isUploadable }) => {
       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-end p-4">
         <h3 className="text-white font-bold text-center">{image.title}</h3>
         <p className="text-accent text-xs mt-1">Click to view</p>
-        {isUploadable && onDelete && (
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(index);
-            }}
-            className="mt-3 p-2 bg-red-500/80 hover:bg-red-600 rounded-lg transition"
-          >
-            <Trash2 size={18} />
-          </motion.button>
-        )}
       </div>
     </motion.div>
   );
@@ -191,119 +100,25 @@ const GalleryItem = ({ image, index, onSelect, onDelete, isUploadable }) => {
 export const Gallery = () => {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const [uploadedImages, setUploadedImages] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const API_URL = 'http://localhost:5000';
-
-  // Load admin status and uploaded images from backend on mount
-  useEffect(() => {
-    const adminStatus = localStorage.getItem('isGalleryAdmin');
-    if (adminStatus === 'true') {
-      setIsAdmin(true);
+  // Hardcoded gallery images that will load perfectly on GitHub Pages / Vercel
+  const allImages = [
+    {
+      url: '/gallery/1783069704624-372443627-4AL24CS409.png',
+      title: 'Achievement',
+      description: 'My photo',
+    },
+    {
+      url: '/gallery/1783069763964-658006500-SMV05902.JPG',
+      title: 'Photography',
+      description: 'My photo',
+    },
+    {
+      url: '/gallery/1783069780748-298879711-SMV05908.JPG',
+      title: 'Event',
+      description: 'My photo',
     }
-
-    fetchImages();
-  }, []);
-
-  const fetchImages = async () => {
-    try {
-      const response = await fetch(`${API_URL}/api/images`);
-      if (response.ok) {
-        const data = await response.json();
-        const imagesWithFullUrl = data.map(img => ({
-          ...img,
-          url: `${API_URL}${img.url}`,
-          isDefault: false
-        }));
-        setUploadedImages(imagesWithFullUrl);
-      }
-    } catch (e) {
-      console.error('Error fetching gallery images:', e);
-    }
-  };
-
-  // Save admin status to localStorage
-  const handleAdminLogin = () => {
-    setIsAdmin(true);
-    localStorage.setItem('isGalleryAdmin', 'true');
-  };
-
-  const handleAdminLogout = () => {
-    setIsAdmin(false);
-    localStorage.setItem('isGalleryAdmin', 'false');
-  };
-
-  // Default gallery images
-  const defaultImages = [
-
   ];
-
-  // Combined gallery images (uploaded + default)
-  const allImages = [...uploadedImages, ...defaultImages];
-
-  const handleFileUpload = async (e) => {
-    const files = Array.from(e.target.files);
-
-    for (const file of files) {
-      if (!file.type.startsWith('image/')) {
-        alert('Please upload only image files');
-        continue;
-      }
-
-      const formData = new FormData();
-      formData.append('image', file);
-      formData.append('title', file.name.split('.')[0]);
-
-      try {
-        const response = await fetch(`${API_URL}/api/upload`, {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (response.ok) {
-          const newImage = await response.json();
-          newImage.url = `${API_URL}${newImage.url}`;
-          newImage.isDefault = false;
-          
-          setUploadedImages((prev) => [newImage, ...prev]);
-        } else {
-          alert('Failed to upload image');
-        }
-      } catch (error) {
-        console.error('Upload error:', error);
-        alert('Error uploading image');
-      }
-    }
-
-    // Reset input
-    e.target.value = '';
-  };
-
-  const handleDeleteImage = async (index) => {
-    const imageToDelete = uploadedImages[index];
-    
-    if (imageToDelete && imageToDelete.id) {
-      try {
-        const response = await fetch(`${API_URL}/api/images/${imageToDelete.id}`, {
-          method: 'DELETE',
-        });
-        
-        if (response.ok) {
-          setUploadedImages((prev) => prev.filter((_, i) => i !== index));
-          setSelectedIndex(null);
-        } else {
-          alert('Failed to delete image');
-        }
-      } catch (error) {
-        console.error('Delete error:', error);
-        alert('Error deleting image');
-      }
-    } else {
-      setUploadedImages((prev) => prev.filter((_, i) => i !== index));
-    }
-  };
 
   const handleNext = () => {
     setSelectedIndex((prev) => (prev + 1) % allImages.length);
@@ -325,27 +140,10 @@ export const Gallery = () => {
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-center mb-8">
             <h2 className="section-title mb-0">
               Gallery
             </h2>
-            {isAdmin ? (
-              <button
-                onClick={handleAdminLogout}
-                className="btn-secondary flex items-center gap-2"
-              >
-                <LogOut size={16} />
-                Logout
-              </button>
-            ) : (
-              <button
-                onClick={() => setShowLoginModal(true)}
-                className="btn-secondary flex items-center gap-2"
-              >
-                <Lock size={16} />
-                Admin
-              </button>
-            )}
           </div>
           <p className="text-secondarytext text-center text-lg font-medium mt-2">
             Explore my photos and achievements.
@@ -354,30 +152,6 @@ export const Gallery = () => {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Upload Button - Only for Admin */}
-          {isAdmin && (
-            <motion.label
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
-              className="premium-card flex flex-col items-center justify-center h-48 cursor-pointer border-dashed border-2 hover:border-[rgba(255,255,255,0.2)]"
-            >
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-              <div className="flex flex-col items-center gap-3 text-gray-300 hover:text-accent transition">
-                <Plus size={56} />
-                <span className="font-bold text-lg">Add Photos</span>
-                <span className="text-sm text-gray-400 font-medium">Click to upload</span>
-              </div>
-            </motion.label>
-          )}
-
           {/* Gallery Items */}
           {allImages.map((image, index) => (
             <GalleryItem
@@ -385,12 +159,6 @@ export const Gallery = () => {
               image={image}
               index={index}
               onSelect={setSelectedIndex}
-              onDelete={
-                isAdmin && !image.isDefault
-                  ? () => handleDeleteImage(index)
-                  : null
-              }
-              isUploadable={!image.isDefault && isAdmin}
             />
           ))}
         </div>
@@ -416,14 +184,6 @@ export const Gallery = () => {
           onClose={() => setSelectedIndex(null)}
           onNext={handleNext}
           onPrev={handlePrev}
-        />
-      )}
-
-      {/* Admin Login Modal */}
-      {showLoginModal && (
-        <AdminLoginModal
-          onLogin={handleAdminLogin}
-          onClose={() => setShowLoginModal(false)}
         />
       )}
     </section>
