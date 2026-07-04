@@ -24,6 +24,8 @@ const ExperienceCard = ({ title, description, type, certificate, delay }) => {
             <span className="text-xl">💼</span>
           ) : type === 'Workshop' ? (
             <span className="text-xl">💡</span>
+          ) : type === 'volunteer' ? (
+            <span className="text-xl">🤝</span>
           ) : (
             <Briefcase className="text-secondarytext" size={20} />
           )}
@@ -44,6 +46,8 @@ const ExperienceCard = ({ title, description, type, certificate, delay }) => {
                 ? 'Internship'
                 : type === 'Workshop'
                   ? 'Workshop'
+                  : type === 'volunteer'
+                    ? 'Volunteer'
                   : 'Work'}
           </div>
           {certificate && (
@@ -92,6 +96,11 @@ export const Experience = () => {
       title: 'Cyber-Security Workshop',
       description: 'Participant in Cryptography and Network Security workshop',
       type: 'Workshop',
+    },
+    {
+      title: 'IEEE WIE VOLUNTEER',
+      description: 'Actively volunteering for IEEE Women in Engineering initiatives',
+      type: 'volunteer',
     },
   ];
 
