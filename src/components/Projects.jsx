@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { Code } from 'lucide-react';
 
 const ProjectCard = ({ project, delay }) => {
-  const { title, description, tech, updated, codeUrl, image, imageAlt } = project;
+  const { title, description, tech, codeUrl, image, imageAlt } = project;
 
   return (
     <motion.div
@@ -26,9 +26,6 @@ const ProjectCard = ({ project, delay }) => {
         <h3 className="text-2xl font-bold text-white group-hover:text-accent transition mb-2">
           {title}
         </h3>
-        <p className="text-sm text-secondarytext font-medium">
-          Updated {updated}
-        </p>
       </div>
 
       {/* Description */}
@@ -71,8 +68,7 @@ export const Projects = () => {
       title: 'Digital Outpass Generator',
       description:
         'A web-based outpass management system for submitting, approving, and tracking student leave requests digitally.',
-      tech: ['TypeScript'],
-      updated: '2026',
+      tech: ['TypeScript'], 
       codeUrl: 'https://github.com/soumyajali/digital_outpass_generator',
       image: '/project-outpass-real.png',
       imageAlt: 'Digital Outpass Generator dashboard preview',
@@ -81,11 +77,19 @@ export const Projects = () => {
       title: 'Digital Manuscript Organizer',
       description:
         'A web application that digitizes, organizes, and preserves ancient manuscripts with upload, categorization, search, and viewing tools.',
-      tech: ['TypeScript'],
-      updated: '2025',
+      tech: ['TypeScript'], 
       codeUrl: 'https://github.com/soumyajali/digital_manuscript_organizer',
       image: '/project-manuscript-real.png',
       imageAlt: 'Digital Manuscript Organizer upload and OCR preview',
+    },
+    {
+      title: 'BankLite',
+      description:
+        'A modern banking web application for account management, transfers, and transaction tracking with a clean responsive interface.',
+      tech: ['React', 'JavaScript', 'MySQL'], 
+      codeUrl: 'https://github.com/soumyajali/banklite',
+      image: '/project-banklite-login.png',
+      imageAlt: 'BankLite login page screenshot',
     },
   ];
 
