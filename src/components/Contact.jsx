@@ -77,7 +77,7 @@ export const Contact = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-3 gap-6 mb-12"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12"
         >
           {contactLinks.map((contact, index) => {
             const Icon = contact.icon;
@@ -91,13 +91,13 @@ export const Contact = () => {
                 whileHover={{ y: -10, scale: 1.02 }}
                 className="group cursor-pointer"
               >
-                <div className="premium-card p-8 text-center h-full flex flex-col justify-center items-center">
+                <div className="premium-card p-6 text-center h-full flex flex-col justify-center items-center">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
-                    className="w-16 h-16 rounded-full bg-[rgba(255,255,255,0.05)] flex items-center justify-center mb-4 border border-[rgba(255,255,255,0.08)]"
+                    className="w-14 h-14 rounded-full bg-[rgba(255,255,255,0.05)] flex items-center justify-center mb-4 border border-[rgba(255,255,255,0.08)]"
                   >
-                    <Icon className="text-accent" size={28} />
+                    <Icon className="text-accent" size={24} />
                   </motion.div>
 
                   <h3 className="text-xl font-bold text-white group-hover:text-accent transition">
