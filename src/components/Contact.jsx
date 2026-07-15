@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, Code, Briefcase, ExternalLink, Phone } from 'lucide-react';
+import { Mail, Code, Briefcase, ExternalLink, Phone, MessageCircle } from 'lucide-react';
 
 export const Contact = () => {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
@@ -12,6 +12,13 @@ export const Contact = () => {
       value: 'www.soumya118@gmail.com',
       link: 'mailto:www.soumya118@gmail.com',
       color: 'from-pink-500 to-rose-500',
+    },
+    {
+      icon: MessageCircle,
+      label: 'WhatsApp',
+      value: 'Message Me',
+      link: 'https://wa.me/917892665324',
+      color: 'from-green-500 to-emerald-500',
     },
     {
       icon: Code,
@@ -115,12 +122,23 @@ export const Contact = () => {
           <p className="text-secondarytext mb-8 max-w-xl mx-auto">
             Drop me an email or connect with me on social media. Let's build something amazing together!
           </p>
-          <a
-            href="mailto:www.soumya118@gmail.com"
-            className="btn-primary flex items-center justify-center"
-          >
-            Send Me an Email
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:www.soumya118@gmail.com"
+              className="btn-primary flex items-center justify-center gap-2"
+            >
+              <Mail size={20} />
+              Send Me an Email
+            </a>
+            <a
+              href="https://wa.me/917892665324"
+              className="btn-primary flex items-center justify-center gap-2"
+              style={{ background: 'linear-gradient(to right, #10b981, #059669)', border: 'none' }}
+            >
+              <MessageCircle size={20} />
+              WhatsApp Me
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
