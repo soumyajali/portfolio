@@ -67,8 +67,8 @@ export const Projects = () => {
     {
       title: 'SmartVision',
       description:
-        'An AI-powered computer vision application deployed on Vercel.',
-      tech: ['Python', 'FastAPI', 'AI'], 
+        'An advanced computer vision application leveraging machine learning models (TensorFlow, OpenCV) for real-time image processing, object detection, and automated analysis, built with Python and deployed on Vercel.',
+      tech: ['Python', 'FastAPI', 'AI'],
       codeUrl: 'https://github.com/soumyajali/SmartVision',
       image: '/project-smartvision.png',
       imageAlt: 'SmartVision project preview',
@@ -77,7 +77,7 @@ export const Projects = () => {
       title: 'Digital Outpass Generator',
       description:
         'A web-based outpass management system for submitting, approving, and tracking student leave requests digitally.',
-      tech: ['TypeScript'], 
+      tech: ['TypeScript'],
       codeUrl: 'https://github.com/soumyajali/digital_outpass_generator',
       image: '/project-outpass-real.png',
       imageAlt: 'Digital Outpass Generator dashboard preview',
@@ -86,7 +86,7 @@ export const Projects = () => {
       title: 'Digital Manuscript Organizer',
       description:
         'A web application that digitizes, organizes, and preserves ancient manuscripts with upload, categorization, search, and viewing tools.',
-      tech: ['TypeScript'], 
+      tech: ['TypeScript'],
       codeUrl: 'https://github.com/soumyajali/digital_manuscript_organizer',
       image: '/project-manuscript-real.png',
       imageAlt: 'Digital Manuscript Organizer upload and OCR preview',
@@ -95,7 +95,7 @@ export const Projects = () => {
       title: 'BankLite',
       description:
         'A modern banking web application for account management, transfers, and transaction tracking with a clean responsive interface.',
-      tech: ['React', 'JavaScript', 'MySQL'], 
+      tech: ['React', 'JavaScript', 'MySQL'],
       codeUrl: 'https://github.com/soumyajali/banklite',
       image: '/project-banklite-login.png',
       imageAlt: 'BankLite login page screenshot',
