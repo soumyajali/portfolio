@@ -65,6 +65,15 @@ export const Projects = () => {
 
   const projects = [
     {
+      title: 'SmartVision',
+      description:
+        'An AI-powered computer vision application deployed on Vercel.',
+      tech: ['Python', 'FastAPI', 'AI'], 
+      codeUrl: 'https://github.com/soumyajali/SmartVision',
+      image: '/project-smartvision.png',
+      imageAlt: 'SmartVision project preview',
+    },
+    {
       title: 'Digital Outpass Generator',
       description:
         'A web-based outpass management system for submitting, approving, and tracking student leave requests digitally.',
