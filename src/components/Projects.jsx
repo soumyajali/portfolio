@@ -100,6 +100,24 @@ export const Projects = () => {
       image: '/project-banklite-login.png',
       imageAlt: 'BankLite login page screenshot',
     },
+    {
+      title: 'Privacy-Preserving Federated IDs',
+      description:
+        'A privacy-preserving federated identity management system.',
+      tech: ['TypeScript'],
+      codeUrl: 'https://github.com/soumyajali/privacy-preserving-federated-ids',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop',
+      imageAlt: 'Privacy-Preserving Federated IDs code',
+    },
+    {
+      title: 'SmartCart',
+      description:
+        'A smart e-commerce or shopping cart application.',
+      tech: ['JavaScript'],
+      codeUrl: 'https://github.com/soumyajali/SmartCart',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop',
+      imageAlt: 'SmartCart Application',
+    }
   ];
 
   return (
