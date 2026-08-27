@@ -104,7 +104,7 @@ export const Projects = () => {
       title: 'Privacy-Preserving Federated IDs',
       description:
         'A privacy-preserving federated identity management system.',
-      tech: ['TypeScript'],
+      tech: ['TypeScript', 'Federated Identity', 'Security'],
       codeUrl: 'https://github.com/soumyajali/privacy-preserving-federated-ids',
       image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1000&auto=format&fit=crop',
       imageAlt: 'Privacy-Preserving Federated IDs code',
@@ -113,7 +113,7 @@ export const Projects = () => {
       title: 'SmartCart',
       description:
         'A smart e-commerce or shopping cart application.',
-      tech: ['JavaScript'],
+      tech: ['JavaScript', 'React', 'Node.js'],
       codeUrl: 'https://github.com/soumyajali/SmartCart',
       image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1000&auto=format&fit=crop',
       imageAlt: 'SmartCart Application',
