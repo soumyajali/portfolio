@@ -77,7 +77,7 @@ export const Projects = () => {
       title: 'Digital Outpass Generator',
       description:
         'A web-based outpass management system for submitting, approving, and tracking student leave requests digitally.',
-      tech: ['TypeScript'],
+      tech: ['TypeScript', 'React', 'Node.js'],
       codeUrl: 'https://github.com/soumyajali/digital_outpass_generator',
       image: '/project-outpass-real.png',
       imageAlt: 'Digital Outpass Generator dashboard preview',
@@ -86,7 +86,7 @@ export const Projects = () => {
       title: 'Digital Manuscript Organizer',
       description:
         'A web application that digitizes, organizes, and preserves ancient manuscripts with upload, categorization, search, and viewing tools.',
-      tech: ['TypeScript'],
+      tech: ['TypeScript', 'React', 'Node.js', 'OCR'],
       codeUrl: 'https://github.com/soumyajali/digital_manuscript_organizer',
       image: '/project-manuscript-real.png',
       imageAlt: 'Digital Manuscript Organizer upload and OCR preview',
